@@ -70,7 +70,13 @@ namespace AceofSpades
 
         public bool Equals(Card other)
         {
-            throw new NotImplementedException();
+            if ( other == null)
+                return false;
+
+            if (this.Suit == other.Suit &&
+                this.Rank == other.Rank)
+                return true;
+            return false;
         }
     }
 }

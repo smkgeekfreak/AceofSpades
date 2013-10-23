@@ -18,11 +18,11 @@ namespace TestPlayingCards
         {
             pile1 = new DrawPile();
             pile1.Initalize();
-            pile1.Cards.Add(new Card(Suit.Spades, Rank.Five));
-            pile1.Cards.Add(new Card(Suit.Clubs, Rank.Two));
-            pile1.Cards.Add(new Card(Suit.Diamonds, Rank.Four));
-            pile1.Cards.Add(new Card(Suit.Spades, Rank.Ace));
-            pile1.Cards.Add(new Card(Suit.Diamonds, Rank.Ten));
+            pile1.Insert(new Card(Suit.Spades, Rank.Five));
+            pile1.Insert(new Card(Suit.Clubs, Rank.Two));
+            pile1.Insert(new Card(Suit.Diamonds, Rank.Four));
+            pile1.Insert(new Card(Suit.Spades, Rank.Ace));
+            pile1.Insert(new Card(Suit.Diamonds, Rank.Ten));
         }
         [TestCleanup]
         public void CleanupPileTests()
@@ -30,30 +30,56 @@ namespace TestPlayingCards
             pile1 = null;
         }
         [TestMethod]
-        public void TestTopOfPile()
+        public void TestDrawPileTopOfPile()
         {
-            InitializePileTests();
             TestHelper.DisplayCollection(pile1);
             Card topCard = pile1.TopOfPile();
             TestHelper.DisplayCard("Top Card is ", topCard);
         }
         [TestMethod]
-        public void TestBottomOfPile()
+        public void TestDrawPileBottomOfPile()
         {
-            InitializePileTests();
             TestHelper.DisplayCollection(pile1);
             Card bottomCard = pile1.BottomOfPile();
             TestHelper.DisplayCard("Bottom Card is ", bottomCard);
         }
-        public void TestInsert()
+        [TestMethod]
+        public void TestDrawPileInsert()
         {
-            pile1.Insert(insertCard1);
+            Card newCard1 = new Card(Suit.Hearts, Rank.Seven);
+            Assert.IsNotNull(pile1.Cards);
+            Assert.IsFalse(pile1.Cards.Contains(newCard1));
+            TestHelper.DisplayCollection("Pile Before Insert", pile1);
+            pile1.Insert(newCard1);
+            TestHelper.DisplayCollection("Pile After Insert", pile1);
+            Assert.IsTrue(pile1.Cards.Contains(newCard1));
         }
-        public void TestDelete()
+        [TestMethod]
+        public void TestDrawPileDeleteTopOfPile()
         {
-            pile1.Delete(insertCard1);
+            //Only allows TopOfPile to be deleted
+            Card topCard = pile1.TopOfPile();
+            TestHelper.DisplayCollection("Draw Pile before delete", pile1);
+            TestHelper.DisplayCard("Card is ", topCard);
+            pile1.Delete(topCard);
+            TestHelper.DisplayCollection("Draw Pile after delete", pile1);
+            Assert.IsFalse(pile1.Cards.Contains(topCard), "Card not deleted");
+
         }
-        public void TestDraw()
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestDrawPileDeleteNotTopOfPile()
+        {
+            //Only allows TopOfPile to be deleted
+            Card notTopCard = pile1.Cards[pile1.Cards.Count - 1];
+            TestHelper.DisplayCollection("Draw Pile before delete", pile1);
+            TestHelper.DisplayCard("Card is ", notTopCard);
+            pile1.Delete(notTopCard);
+            TestHelper.DisplayCollection("Draw Pile after delete", pile1);
+        }
+
+        [TestMethod]
+        public void TestDrawPileDraw()
         {
             pile1.Draw(hand1);
         }

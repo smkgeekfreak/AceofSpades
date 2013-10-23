@@ -9,25 +9,43 @@ namespace AceofSpades
     {
         public int InitialSize { get; set; }
 
-
         public override void Insert(Card insertCard)
         {
-            throw new NotImplementedException();
+            if (Cards == null)
+                throw new ArgumentNullException("Cards cannot be null");
+
+            if (Cards.Contains(insertCard))
+                throw new ArgumentException("Hand contains duplicate card");
+            if (Cards.Count == InitialSize)
+                throw new ArgumentException("Hand is full");
+            else
+            {
+                _cards.Add(insertCard);
+            }
         }
 
         public override void Delete(Card deleteCard)
         {
-            throw new NotImplementedException();
+            if (Cards.IsNullOrEmpty())
+                throw new ArgumentException("No cards in hand to discard");
+
+            if (Cards.Contains(deleteCard))
+            {
+                _cards.Remove(deleteCard);
+            }
+            else
+                throw new ArgumentException("Card is not in hand");
         }
+
 
         public Hand(int size)
         {
             InitialSize = size;
-            Cards = new List<Card>(size);
+            _cards = new List<Card>(size);
         }
         public void Sort()
         {
-            Cards.Sort();
+            _cards.Sort();
         }
 
     }

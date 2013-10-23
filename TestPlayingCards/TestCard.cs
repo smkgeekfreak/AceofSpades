@@ -12,7 +12,7 @@ namespace TestPlayingCards
         DrawPile drawPile1 = new DrawPile();
 
         [TestMethod]
-        public void TestDisplay()
+        public void TestCardDisplay()
         {
             string expected = String.Format("{0} of {1}", c1.Rank, c1.Suit);
             Console.Out.WriteLine(c1.Display());
@@ -20,7 +20,7 @@ namespace TestPlayingCards
         }
 
         [TestMethod]
-        public void TestCompareSameRankDiffSuit()
+        public void TestCardCompareSameRankDiffSuit()
         {
             c1.Suit = Suit.Spades;
             otherCard.Suit = Suit.Diamonds;
@@ -32,7 +32,7 @@ namespace TestPlayingCards
         }
 
         [TestMethod]
-        public void TestCompareSameSuitDiffRankFirstHigh()
+        public void TestCardCompareSameSuitDiffRankFirstHigh()
         {
             c1.Suit = Suit.Spades;
             otherCard.Suit = Suit.Spades;
@@ -43,7 +43,7 @@ namespace TestPlayingCards
             Assert.AreEqual(1, c1.Compare(otherCard));
         }
         [TestMethod]
-        public void TestCompareSameSuitDiffRankFirstLow()
+        public void TestCardCompareSameSuitDiffRankFirstLow()
         {
             c1.Suit = Suit.Spades;
             otherCard.Suit = Suit.Spades;
@@ -54,7 +54,7 @@ namespace TestPlayingCards
             Assert.AreEqual(-1, c1.Compare(otherCard));
         }
         [TestMethod]
-        public void TestCompareDiffSuitDiffRankFirstHigh()
+        public void TestCardCompareDiffSuitDiffRankFirstHigh()
         {
             c1.Suit = Suit.Clubs;
             otherCard.Suit = Suit.Spades;
@@ -65,7 +65,7 @@ namespace TestPlayingCards
             Assert.AreEqual(1, c1.Compare(otherCard));
         }
         [TestMethod]
-        public void TestCompareSameDiffDiffRankFirstLow()
+        public void TestCardCompareSameDiffDiffRankFirstLow()
         {
             c1.Suit = Suit.Hearts;
             otherCard.Suit = Suit.Diamonds;

@@ -10,7 +10,7 @@ namespace AceofSpades
     {
         public override void Initalize()
         {
-            Cards = new List<Card>(52);
+            _cards = new List<Card>(52);
             //Loop through the set of Suit and add a card for each rank for every suit
             var suits= Enum.GetValues(typeof(Suit)).Cast<Suit>();
             var ranks= Enum.GetValues(typeof(Rank)).Cast<Rank>();
@@ -18,7 +18,7 @@ namespace AceofSpades
             {
                 foreach (Rank r in ranks)
                 {
-                    Cards.Add(new Card(s, r));
+                    _cards.Add(new Card(s, r));
                 }
             }
         }
@@ -51,7 +51,7 @@ namespace AceofSpades
                  */
                 foreach (Hand hand in hands)
                 {
-                    hand.Cards.Add(this.TopOfPile());
+                    hand.Insert(this.TopOfPile());
                     this.Delete(this.TopOfPile());
                 }
             }
@@ -67,10 +67,9 @@ namespace AceofSpades
             {
                 loopCounter--;
                 int index = rdm.Next(loopCounter + 1);
-                //int index = MyThreadSafeRandom.ThisThreadsRandom.Next(loopCounter + 1);
                 Card moveCard = Cards[index];
-                Cards[index] = Cards[loopCounter];
-                Cards[loopCounter] = moveCard;
+                _cards[index] = Cards[loopCounter];
+                _cards[loopCounter] = moveCard;
             }
         }
 

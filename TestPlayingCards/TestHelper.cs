@@ -24,7 +24,7 @@ namespace TestPlayingCards
         }
         static public void DisplayCard(String prefix, Card card)
         {
-            Console.Out.WriteLine(prefix + card.Display());
+            Console.Out.WriteLine(prefix + ":" + card.Display());
             Console.Out.WriteLine("-----------------");
         }
     }

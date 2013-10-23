@@ -10,22 +10,43 @@ namespace AceofSpades
 
         public override void Insert(Card insertCard)
         {
-            throw new NotImplementedException();
+            if (Cards == null)
+                throw new ArgumentNullException("Cards cannot be null");
+
+            if (Cards.Contains(insertCard))
+                throw new ArgumentException("Pile contains duplicate card");
+            else
+            {
+                _cards.Add(insertCard);
+            }
         }
 
         public override void Delete(Card deleteCard)
         {
-            throw new NotImplementedException();
+            if (Cards.IsNullOrEmpty())
+                throw new ArgumentException("No cards to discard");
+
+            if (TopOfPile() == deleteCard)
+            {
+                _cards.Remove(deleteCard);
+            }
+            else
+                throw new ArgumentException("Card is not on the top");
         }
 
-        public void Draw(Hand hand1)
+        public void Draw(Hand hand)
         {
-            throw new NotImplementedException();
+            if (hand == null)
+                throw new ArgumentNullException("Hand cannot be null");
+
+            Card drawCard = TopOfPile();
+            Delete(TopOfPile());
+            hand.Insert(drawCard);
         }
 
         public Card TopOfPile()
         {
-            if (Cards == null || Cards.Count < 1)
+            if (Cards.IsNullOrEmpty())
                 throw new ArgumentNullException("Cards may not be null");
             return Cards[0];
             
@@ -33,7 +54,7 @@ namespace AceofSpades
 
         public Card BottomOfPile()
         {
-            if (Cards == null || Cards.Count < 1)
+            if (Cards.IsNullOrEmpty())
                 throw new ArgumentNullException("Cards may not be null");
             return Cards[Cards.Count-1];
         }
