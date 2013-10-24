@@ -22,10 +22,8 @@ namespace TestPlayingCards
         [TestMethod]
         public void TestCardCompareSameRankDiffSuit()
         {
-            c1.Suit = Suit.Spades;
-            otherCard.Suit = Suit.Diamonds;
-            c1.Rank = Rank.King;
-            otherCard.Rank = Rank.King;
+            c1 = new Card(Suit.Spades, Rank.King);
+            otherCard = new Card(Suit.Diamonds, Rank.King);
             Console.Out.WriteLine(c1.Display());
             Console.Out.WriteLine(otherCard.Display());
             Assert.AreEqual(1, c1.Compare(otherCard));
@@ -34,10 +32,8 @@ namespace TestPlayingCards
         [TestMethod]
         public void TestCardCompareSameSuitDiffRankFirstHigh()
         {
-            c1.Suit = Suit.Spades;
-            otherCard.Suit = Suit.Spades;
-            c1.Rank = Rank.Eight;
-            otherCard.Rank = Rank.Four;
+            c1 = new Card(Suit.Spades, Rank.Eight);
+            otherCard = new Card(Suit.Spades, Rank.Four);
             Console.Out.WriteLine(c1.Display());
             Console.Out.WriteLine(otherCard.Display());
             Assert.AreEqual(1, c1.Compare(otherCard));
@@ -45,10 +41,8 @@ namespace TestPlayingCards
         [TestMethod]
         public void TestCardCompareSameSuitDiffRankFirstLow()
         {
-            c1.Suit = Suit.Spades;
-            otherCard.Suit = Suit.Spades;
-            c1.Rank = Rank.Three;
-            otherCard.Rank = Rank.Jack;
+            c1 = new Card(Suit.Spades, Rank.Three);
+            otherCard = new Card(Suit.Spades, Rank.Four);
             Console.Out.WriteLine(c1.Display());
             Console.Out.WriteLine(otherCard.Display());
             Assert.AreEqual(-1, c1.Compare(otherCard));
@@ -56,10 +50,8 @@ namespace TestPlayingCards
         [TestMethod]
         public void TestCardCompareDiffSuitDiffRankFirstHigh()
         {
-            c1.Suit = Suit.Spades;
-            otherCard.Suit = Suit.Clubs;
-            c1.Rank = Rank.Four;
-            otherCard.Rank = Rank.Eight;
+            c1 = new Card(Suit.Spades, Rank.Four);
+            otherCard = new Card(Suit.Clubs, Rank.Eight);
             Console.Out.WriteLine(c1.Display());
             Console.Out.WriteLine(otherCard.Display());
             Assert.AreEqual(1, c1.Compare(otherCard));
@@ -67,10 +59,8 @@ namespace TestPlayingCards
         [TestMethod]
         public void TestCardCompareDiffSuitDiffRankFirstLow()
         {
-            c1.Suit = Suit.Diamonds;
-            otherCard.Suit = Suit.Hearts;
-            c1.Rank = Rank.Three;
-            otherCard.Rank = Rank.Jack;
+            c1 = new Card(Suit.Diamonds, Rank.Three);
+            otherCard = new Card(Suit.Hearts, Rank.Jack);
             Console.Out.WriteLine(c1.Display());
             Console.Out.WriteLine(otherCard.Display());
             Assert.AreEqual(-1, c1.Compare(otherCard));

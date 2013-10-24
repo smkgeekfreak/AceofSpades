@@ -8,18 +8,26 @@ namespace AceofSpades
 {
     public class Card : IComparable, IEquatable<Card>
     {
-        public Suit Suit { get; set; }
+        #region Private members
+        private Suit _suit;
+        private Rank _rank;
+        #endregion 
 
-        public Rank Rank { get; set; }
+        #region Public Properties
+        public Suit Suit { get { return _suit; } }
 
-        public Card()
-        { // Blank card
-        }
+        public Rank Rank { get { return _rank; } }
+        #endregion 
+
+        #region Public Constructors
         public Card(Suit suit, Rank rank)
         {
-            Suit = suit;
-            Rank = rank;
+            _suit = suit;
+            _rank = rank;
         }
+        #endregion
+
+        #region Public Methods
         public string Display()
 
         {
@@ -79,5 +87,6 @@ namespace AceofSpades
                 return true;
             return false;
         }
+        #endregion
     }
 }
