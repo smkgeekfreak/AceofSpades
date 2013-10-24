@@ -8,7 +8,6 @@ namespace TestPlayingCards
     public class TestDrawPile
     {
         Pile pile1 = new DrawPile();
-        Card insertCard1 = new Card();
         Hand hand1 = new Hand(5);
 
         //[ClassInitialize]
@@ -23,6 +22,10 @@ namespace TestPlayingCards
             pile1.Insert(new Card(Suit.Diamonds, Rank.Four));
             pile1.Insert(new Card(Suit.Spades, Rank.Ace));
             pile1.Insert(new Card(Suit.Diamonds, Rank.Ten));
+            pile1.Insert(new Card(Suit.Hearts, Rank.Ten));
+            pile1.Insert(new Card(Suit.Hearts, Rank.Six));
+            pile1.Insert(new Card(Suit.Diamonds, Rank.King));
+            pile1.Insert(new Card(Suit.Clubs, Rank.Ace));
         }
         [TestCleanup]
         public void CleanupPileTests()
@@ -75,13 +78,19 @@ namespace TestPlayingCards
             TestHelper.DisplayCollection("Draw Pile before delete", pile1);
             TestHelper.DisplayCard("Card is ", notTopCard);
             pile1.Delete(notTopCard);
-            TestHelper.DisplayCollection("Draw Pile after delete", pile1);
         }
 
         [TestMethod]
         public void TestDrawPileDraw()
         {
+            Card topCard = pile1.TopOfPile();
+            TestHelper.DisplayCollection("Draw Pile before draw", pile1);
+            TestHelper.DisplayCollection("Hand before draw", hand1);
             pile1.Draw(hand1);
+            TestHelper.DisplayCollection("Draw Pile before draw", pile1);
+            TestHelper.DisplayCollection("Hand before draw", hand1);
+            Assert.IsFalse(pile1.Cards.Contains(topCard), "Card not drawn");
+            Assert.IsTrue(hand1.Cards.Contains(topCard), "Card not put into hand");
         }
     }
 }

@@ -56,19 +56,19 @@ namespace TestPlayingCards
         [TestMethod]
         public void TestCardCompareDiffSuitDiffRankFirstHigh()
         {
-            c1.Suit = Suit.Clubs;
-            otherCard.Suit = Suit.Spades;
-            c1.Rank = Rank.Eight;
-            otherCard.Rank = Rank.Four;
+            c1.Suit = Suit.Spades;
+            otherCard.Suit = Suit.Clubs;
+            c1.Rank = Rank.Four;
+            otherCard.Rank = Rank.Eight;
             Console.Out.WriteLine(c1.Display());
             Console.Out.WriteLine(otherCard.Display());
             Assert.AreEqual(1, c1.Compare(otherCard));
         }
         [TestMethod]
-        public void TestCardCompareSameDiffDiffRankFirstLow()
+        public void TestCardCompareDiffSuitDiffRankFirstLow()
         {
-            c1.Suit = Suit.Hearts;
-            otherCard.Suit = Suit.Diamonds;
+            c1.Suit = Suit.Diamonds;
+            otherCard.Suit = Suit.Hearts;
             c1.Rank = Rank.Three;
             otherCard.Rank = Rank.Jack;
             Console.Out.WriteLine(c1.Display());

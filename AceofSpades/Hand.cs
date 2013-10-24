@@ -37,15 +37,20 @@ namespace AceofSpades
                 throw new ArgumentException("Card is not in hand");
         }
 
+        public void Sort()
+        {
+            _cards.Sort();
+        }        
+
+        public override void Initalize()
+        {
+            // bypass initalize resetting the size
+        }
 
         public Hand(int size)
         {
             InitialSize = size;
             _cards = new List<Card>(size);
-        }
-        public void Sort()
-        {
-            _cards.Sort();
         }
 
     }

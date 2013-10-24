@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AceofSpades;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace TestPlayingCards
 {
@@ -66,6 +68,36 @@ namespace TestPlayingCards
             TestHelper.DisplayCollection("Hand Before Sort",hand1);
             hand1.Sort();
             TestHelper.DisplayCollection("Hand After Sort",hand1);
+            for(int c = 0; c < hand1.Cards.Count; c++)
+            {
+                Card card = hand1.Cards[c];
+                for(int oc = c+1 ; oc < hand1.Cards.Count; oc++)
+                {
+                    Card otherCard = hand1.Cards[oc];
+                    Assert.IsTrue(otherCard.CompareTo(card)==1, "Not Sorted");
+                }
+            }
+        }
+
+        [TestMethod]
+        public void TestHandSort52()
+        {
+            Deck deck1 = new Deck();
+            deck1.Initalize();
+            deck1.Shuffle();
+            List<Hand> sortHands = deck1.Deal(1,52);
+            TestHelper.DisplayCollection("Hand Before Sort",sortHands[0]);
+            sortHands[0].Sort();
+            TestHelper.DisplayCollection("Hand After Sort",sortHands[0]);
+            for (int c = 0; c < sortHands[0].Cards.Count; c++)
+            {
+                Card card = sortHands[0].Cards[c];
+                for (int oc = c + 1; oc < sortHands[0].Cards.Count; oc++)
+                {
+                    Card otherCard = sortHands[0].Cards[oc];
+                    Assert.IsTrue(otherCard.CompareTo(card) == 1, "Not Sorted");
+                }
+            }
         }
 
         [TestMethod]

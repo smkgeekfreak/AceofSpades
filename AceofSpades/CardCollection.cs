@@ -14,7 +14,7 @@ namespace AceofSpades
         public virtual void Initalize() { _cards = new List<Card>(); }
         public abstract void Insert(Card insertCard);
         public abstract void Delete(Card deleteCard);
-        public void Discard(Card card, DrawPile pile1)
+        public void Discard(Card card, CardCollection cardCollection)
         {
             if (Cards.IsNullOrEmpty())
                 throw new ArgumentException("No cards to discard");
@@ -22,14 +22,14 @@ namespace AceofSpades
             if (Cards.Contains(card)) 
             {
                 Delete(card);
-                pile1.Insert(card);
+                cardCollection.Insert(card);
             }
             else
                 throw new ArgumentException("Card is not in collection");
         }
     }
 
-    static class MyExtensions
+    public static class MyExtensions
     {
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> enumerable)
         {
@@ -37,6 +37,14 @@ namespace AceofSpades
                 return true;
 
             return !enumerable.Any();
+        }
+
+        public static IEnumerable<T> FindAllAfter<T>(this IEnumerable<T> enumerable, Func<T,bool> match)
+        {
+            if (enumerable == null)
+                return null;
+
+            return enumerable.Where(match);
         }
     }
 }

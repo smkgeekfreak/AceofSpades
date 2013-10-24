@@ -36,13 +36,14 @@ namespace AceofSpades
             if (this == otherCard)
                 return 0;
 
-            if (this.Rank > otherCard.Rank)
+            if (this.Suit > otherCard.Suit) 
                 return 1;
-            else if (this.Rank < otherCard.Rank)
+            else if (this.Suit < otherCard.Suit) 
                 return -1;
-            else if (this.Suit > otherCard.Suit) // this.Rank == otherCard.Rank
+            // this.Suit == otherCard.Suit
+            else if (this.Rank > otherCard.Rank)
                 return 1;
-            else // this.Suit < otherCad.Suit
+            else // this.Rank < otherCard.Rank
                 return -1;
         }
 
